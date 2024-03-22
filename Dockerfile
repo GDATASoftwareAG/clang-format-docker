@@ -1,4 +1,6 @@
-FROM alpine:latest as builder
+ARG ALPINE_TAG=latest
+
+FROM alpine:${ALPINE_TAG} as builder
 
 ARG VERSION
 ARG BRANCH=release/${VERSION}.x
