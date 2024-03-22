@@ -22,18 +22,18 @@ jobs:
         id: prep
         run: |
           if [[ ${GITHUB_REF##*/} == "main" ]]; then
-            echo ::set-output name=push::true
+            echo push=true >> $GITHUB_OUTPUT
           else
-            echo ::set-output name=push::false
+            echo push=false >> $GITHUB_OUTPUT
           fi
-          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_OUTPUT
       - name: Login to DockerHub
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Build docker image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           build-args: VERSION=${{ matrix.version }}
           push: ${{ steps.prep.outputs.push }}
