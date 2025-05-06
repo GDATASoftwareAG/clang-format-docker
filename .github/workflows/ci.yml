@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [13, 14, 15, 16, 17, 18]
+        version: [13, 14, 15, 16, 17, 18, 19]
         include:
           - version: 13
             alpine_tag: 3.18
@@ -28,6 +28,8 @@ jobs:
           - version: 17
             alpine_tag: latest
           - version: 18
+            alpine_tag: latest
+          - version: 19
             alpine_tag: latest
 
 
